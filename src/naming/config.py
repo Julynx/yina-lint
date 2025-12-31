@@ -12,7 +12,7 @@ except ModuleNotFoundError:
 
 # Configuration file names
 CONFIG_FILENAME = ".naming.toml"
-DEFAULT_CONFIG_PATH = Path(__file__).parent.parent.parent / "config" / "naming.toml"
+DEFAULT_CONFIG_PATH = Path(__file__).parent / "config" / "naming.toml"
 
 
 def load_config(working_dir: Optional[Path] = None) -> Dict[str, Any]:

@@ -16,6 +16,9 @@ yina = "naming.cli:main"
 [tool.uv]
 package = true
 
+[tool.setuptools.package-data]
+"naming" = ["config/*.toml"]
+
 [dependency-groups]
 dev = [
     "black>=25.12.0",
