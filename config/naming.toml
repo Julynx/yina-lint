@@ -1,0 +1,56 @@
+# Naming Linter Configuration File
+
+[linter]
+# Default strictness level (1-5)
+default_level = 3
+
+# Names that are always allowed (bypass all checks)
+allowed_names = []
+
+# Segments that are always allowed within names
+allowed_segments = [
+    "as",
+    "at",
+    "by",
+    "do",
+    "go",
+    "if",
+    "in",
+    "is",
+    "my",
+    "no",
+    "of",
+    "ok",
+    "on",
+    "or",
+    "to",
+    "up",
+]
+
+# Names that are always banned
+banned_names = []
+
+# Segments that are banned within names
+banned_segments = []
+
+[level_five]
+# Vague words to check
+# These will be flagged as too generic
+vague_words = [
+    "item",
+    "items",
+    "thing",
+    "things",
+    "object",
+    "objects",
+    "element",
+    "elements",
+    "data",
+    "value",
+    "result",
+    "string",
+    "dataframe",
+]
+
+# Allow numbers in variable names (disables level 5 number check)
+allow_numbers = false
