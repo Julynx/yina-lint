@@ -16,6 +16,11 @@
             "color": "#28a745"
         },
         {
+            "text": "$(arrow-down) Pull",
+            "command": "git pull",
+            "color": "#17a2b8"
+        },
+        {
             "text": "$(gear) Bump",
             "command": "uv version --bump patch",
             "color": "#6f42c1"
