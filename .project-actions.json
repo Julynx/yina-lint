@@ -9,6 +9,16 @@
             "text": "$(arrow-up) Push",
             "command": "git add . && git commit && git push",
             "color": "#28a745"
+        },
+        {
+            "text": "$(gear) Bump",
+            "command": "uv version --bump patch",
+            "color": "#6f42c1"
+        },
+        {
+            "text": "$(rocket) Publish",
+            "command": "uv build; uv publish",
+            "color": "#d73a49"
         }
     ]
 }

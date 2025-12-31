@@ -39,7 +39,7 @@ Yina lint operates on 5 strictness levels. Each level includes all the rules fro
 
 ## Configuration
 
-- If there is a `.naming.toml` file in the working directory, it will be used.
-- If not, the default `yina-lint/config/naming.toml` file will be applied.
+- If there is a `.yina.toml` file in the working directory, it will be used.
+- If not, the default `yina-lint/config/yina.toml` file will be applied.
 
 You can use the command `yina init` to create a configuration file for your project with the default values you can modify.

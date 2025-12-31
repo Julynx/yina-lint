@@ -1,5 +1,5 @@
 [project]
-name = "naming"
+name = "yina"
 version = "0.1.0"
 description = "A Python linter focused on naming conventions with 5 strictness levels"
 readme = "README.md"
@@ -11,13 +11,13 @@ dependencies = [
 ]
 
 [project.scripts]
-yina = "naming.cli:main"
+yina = "yina.cli:main"
 
 [tool.uv]
 package = true
 
 [tool.setuptools.package-data]
-"naming" = ["config/*.toml"]
+"yina" = ["config/*.toml"]
 
 [dependency-groups]
 dev = [

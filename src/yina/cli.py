@@ -1,4 +1,4 @@
-"""Command-line interface for the naming linter."""
+"""Command-line interface for the yina linter."""
 
 import argparse
 import sys
@@ -6,9 +6,9 @@ from pathlib import Path
 
 from colorama import Fore, Style, init as colorama_init
 
-from naming.config import init_config, load_config
-from naming.linter import lint_directory, lint_file
-from naming.validators import StrictnessLevel
+from yina.config import init_config, load_config
+from yina.linter import lint_directory, lint_file
+from yina.validators import StrictnessLevel
 
 
 def format_errors(errors_dict: dict) -> str:
@@ -132,7 +132,7 @@ def main():
 
     # Init command
     init_parser = subparsers.add_parser(
-        "init", help="Create a .naming.toml configuration file in the current directory"
+        "init", help="Create a .yina.toml configuration file in the current directory"
     )
     init_parser.set_defaults(func=handle_init_command)
 

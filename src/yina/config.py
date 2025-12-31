@@ -1,4 +1,4 @@
-"""Configuration loading and management for the naming linter."""
+"""Configuration loading and management for the yina linter."""
 
 import shutil
 from pathlib import Path
@@ -11,8 +11,8 @@ except ModuleNotFoundError:
 
 
 # Configuration file names
-CONFIG_FILENAME = ".naming.toml"
-DEFAULT_CONFIG_PATH = Path(__file__).parent / "config" / "naming.toml"
+CONFIG_FILENAME = ".yina.toml"
+DEFAULT_CONFIG_PATH = Path(__file__).parent / "config" / "yina.toml"
 
 
 def load_config(working_dir: Optional[Path] = None) -> Dict[str, Any]:
