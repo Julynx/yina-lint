@@ -4,6 +4,8 @@ import re
 from enum import IntEnum
 from typing import List
 
+from colorama import Fore, Style
+
 # Constants for validation rules
 MIN_NAME_LENGTH = 3
 MAX_NAME_LENGTH = 32
@@ -49,7 +51,21 @@ class ValidationError:
             if self.column_number is not None:
                 location += f", col {self.column_number}"
             location += ")"
-        return f"Level {self.level}: {self.name}{location} - {self.message}"
+
+        # Color the name in cyan
+        colored_name = f"{Fore.CYAN}{self.name}{Style.RESET_ALL}"
+
+        # Color segments in yellow when they appear in the message
+        colored_message = self.message
+        if "Segment '" in self.message:
+            # Extract and color segment names
+            colored_message = re.sub(
+                r"Segment '([^']+)'",
+                rf"Segment '{Fore.YELLOW}\1{Style.RESET_ALL}'",
+                self.message,
+            )
+
+        return f"Level {self.level}: {colored_name}{location} - {colored_message}"
 
     def __str__(self):
         """Human-readable string representation."""

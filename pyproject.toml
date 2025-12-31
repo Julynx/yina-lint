@@ -5,6 +5,7 @@ description = "A Python linter focused on naming conventions with 5 strictness l
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "colorama>=0.4.6",
     "tomli>=2.3.0",
     "tomli-w>=1.2.0",
 ]

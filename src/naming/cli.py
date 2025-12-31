@@ -4,6 +4,8 @@ import argparse
 import sys
 from pathlib import Path
 
+from colorama import Fore, Style, init as colorama_init
+
 from naming.config import init_config, load_config
 from naming.linter import lint_directory, lint_file
 from naming.validators import StrictnessLevel
@@ -20,7 +22,7 @@ def format_errors(errors_dict: dict) -> str:
         Formatted string with error details
     """
     if not errors_dict:
-        return "✓ No naming violations found!"
+        return f"{Fore.GREEN}✓ No naming violations found!{Style.RESET_ALL}"
 
     output_lines = []
     total_errors = 0
@@ -28,7 +30,7 @@ def format_errors(errors_dict: dict) -> str:
     for file_path, errors in errors_dict.items():
         if errors:
             output_lines.append(f"\n{'=' * 80}")
-            output_lines.append(f"File: {file_path}")
+            output_lines.append(f"File: {Fore.MAGENTA}{file_path}{Style.RESET_ALL}")
             output_lines.append("=" * 80)
 
             for error in errors:
@@ -36,7 +38,9 @@ def format_errors(errors_dict: dict) -> str:
                 total_errors += 1
 
     output_lines.append(f"\n{'=' * 80}")
-    output_lines.append(f"Total violations found: {total_errors}")
+    output_lines.append(
+        f"Total violations found: {Fore.RED}{total_errors}{Style.RESET_ALL}"
+    )
     output_lines.append("=" * 80)
 
     return "\n".join(output_lines)
@@ -113,6 +117,9 @@ def handle_lint_command(args):
 
 def main():
     """Main entry point for the CLI."""
+    # Initialize colorama for cross-platform color support
+    colorama_init(autoreset=False)
+
     parser = argparse.ArgumentParser(
         description="Lint Python code for naming convention violations.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
