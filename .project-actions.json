@@ -1,6 +1,11 @@
 {
     "actions": [
         {
+            "text": "$(check) Lint",
+            "command": "uv run pylint src; uv run yina lint src",
+            "color": "#007acc"
+        },
+        {
             "text": "$(arrow-up) Push",
             "command": "git add . && git commit && git push",
             "color": "#28a745"

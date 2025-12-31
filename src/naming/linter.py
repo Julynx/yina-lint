@@ -67,9 +67,8 @@ class NamingLinter(ast.NodeVisitor):
                 self.errors.extend(errors)
         self.generic_visit(node)
 
-    def visit_FunctionDef(
-        self, node: ast.FunctionDef
-    ) -> None:  # pylint: disable=invalid-name
+    # pylint: disable=invalid-name
+    def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
         """Visit function definition nodes (method name required by ast.NodeVisitor)."""
         name = node.name
         if name not in self.validated_names and not name.startswith("_"):
@@ -89,9 +88,8 @@ class NamingLinter(ast.NodeVisitor):
 
         self.generic_visit(node)
 
-    def visit_AsyncFunctionDef(
-        self, node: ast.AsyncFunctionDef
-    ) -> None:  # pylint: disable=invalid-name
+    # pylint: disable=invalid-name
+    def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
         """Visit async function definition nodes (method name required by ast.NodeVisitor)."""
         name = node.name
         if name not in self.validated_names and not name.startswith("_"):
@@ -111,9 +109,8 @@ class NamingLinter(ast.NodeVisitor):
 
         self.generic_visit(node)
 
-    def visit_ClassDef(
-        self, node: ast.ClassDef
-    ) -> None:  # pylint: disable=invalid-name
+    # pylint: disable=invalid-name
+    def visit_ClassDef(self, node: ast.ClassDef) -> None:
         """Visit class definition nodes (method name required by ast.NodeVisitor)."""
         name = node.name
         if name not in self.validated_names:

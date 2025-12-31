@@ -158,7 +158,7 @@ def validate_level_two(name: str, is_class: bool = False) -> List[ValidationErro
             )
     else:
         # Regular variables should be snake_case (no capitals)
-        if not re.match(r"^[a-z][a-z0-9_]*$", name):
+        if re.match(r".*[A-Z].*", name):
             errors.append(
                 ValidationError(
                     name,
@@ -368,8 +368,8 @@ def check_allowed_banned(
     errors = []
 
     # Convert to lowercase sets for O(1) lookups
-    banned_names_lower = {bn.lower() for bn in banned_names}
-    banned_segments_lower = {bs.lower() for bs in banned_segments}
+    banned_names_lower = {banned_name.lower() for banned_name in banned_names}
+    banned_segments_lower = {banned_segment.lower() for banned_segment in banned_segments}
 
     # Check banned names
     if name.lower() in banned_names_lower:
@@ -431,7 +431,7 @@ def validate_name(  # pylint: disable=too-many-arguments,too-many-positional-arg
     allow_numbers = config.get("level_five", {}).get("allow_numbers", False)
 
     # Convert to lowercase set for O(1) lookup
-    allowed_names_lower = {an.lower() for an in allowed_names}
+    allowed_names_lower = {allowed_name.lower() for allowed_name in allowed_names}
 
     # Check if name is in allowed list (bypass all checks)
     if name.lower() in allowed_names_lower:
