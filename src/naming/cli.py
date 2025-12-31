@@ -74,7 +74,7 @@ def handle_lint_command(args):
         default_level = config.get("linter", {}).get("default_level", 5)
     except FileNotFoundError as error:
         print(f"Error: {error}", file=sys.stderr)
-        print("Run 'jina init' to create a configuration file.", file=sys.stderr)
+        print("Run 'yina init' to create a configuration file.", file=sys.stderr)
         sys.exit(1)
 
     # Use level from args or config
@@ -147,9 +147,9 @@ Strictness Levels:
   5 - Non-vagueness (no vague words, no numbers)
 
 Examples:
-  jina lint myfile.py --level 3
-  jina lint src/ --level 5
-  jina lint . --level 2
+  yina lint myfile.py --level 3
+  yina lint src/ --level 5
+  yina lint . --level 2
         """,
     )
 

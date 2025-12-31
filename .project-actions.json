@@ -1,0 +1,9 @@
+{
+    "actions": [
+        {
+            "text": "$(arrow-up) Push",
+            "command": "git add . && git commit && git push",
+            "color": "#28a745"
+        }
+    ]
+}

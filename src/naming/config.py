@@ -39,7 +39,7 @@ def load_config(working_dir: Optional[Path] = None) -> Dict[str, Any]:
         return load_config_file(DEFAULT_CONFIG_PATH)
 
     raise FileNotFoundError(
-        "No configuration file found. Run 'jina init' to create one."
+        "No configuration file found. Run 'yina init' to create one."
     )
 
 
