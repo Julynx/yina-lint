@@ -18,7 +18,7 @@ Variable name linter for Python projects.
 
 ### Level three: Word length, max length, repetition
 
-- Max variable length: 20
+- Max variable length: 32 characters.
 - **Applied for each "segment", like "one" in "one_two_three", or "One" in "OneTwoThree" (classes):**
   - No more than 2 underscores in a row.
   - No more than 2 of the same letter in a row.
@@ -28,7 +28,7 @@ Variable name linter for Python projects.
 
 - **Applied for each "segment", like "one" in "one_two_three", or "One" in "OneTwoThree" (classes):**
   - At least one vowel
-  - No more than 3 consonants in a row
+  - No more than 4 consonants in a row
 
 ### Level five: Non vagueness
 
