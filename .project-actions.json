@@ -1,8 +1,13 @@
 {
     "actions": [
         {
+            "text": "$(zap) Format",
+            "command": "uv run -m black src",
+            "color": "#f1c40f"
+        },
+        {
             "text": "$(check) Lint",
-            "command": "uv run pylint src; uv run yina lint src",
+            "command": "uv run -m pylint src; uv run yina lint src",
             "color": "#007acc"
         },
         {
