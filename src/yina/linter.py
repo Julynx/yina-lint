@@ -4,7 +4,7 @@ import ast
 from pathlib import Path
 from typing import Dict, List
 
-from naming.validators import StrictnessLevel, ValidationError, validate_name
+from yina.validators import StrictnessLevel, ValidationError, validate_name
 
 
 class NamingLinter(ast.NodeVisitor):
