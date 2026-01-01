@@ -175,7 +175,6 @@ def validate_level_three(
     name: str,
     is_class: bool = False,
     allowed_segments: list = None,
-    skip_segment_length: bool = False,
 ) -> List[ValidationError]:
     """
     Validate Level 3 rules: length limits and repetition.
@@ -189,7 +188,6 @@ def validate_level_three(
         name: Variable name to validate
         is_class: Whether this is a class name
         allowed_segments: List of segments that bypass all checks
-        skip_segment_length: Skip segment length check if Level 1 length failed
 
     Returns:
         List of ValidationError objects
@@ -242,6 +240,7 @@ def validate_level_three(
             )
 
         # Check segment length (skip if Level 1 length check already failed)
+        skip_segment_length = len(name) < MIN_NAME_LENGTH <= MIN_SEGMENT_LENGTH
         if not skip_segment_length and len(segment) < MIN_SEGMENT_LENGTH:
             errors.append(
                 ValidationError(
@@ -454,31 +453,15 @@ def validate_name(  # pylint: disable=too-many-arguments,too-many-positional-arg
             error.column_number = column_number
         return all_errors
 
-    # Track if Level 1 length check failed
-    level_one_length_failed = False
-
     if max_level >= StrictnessLevel.LEVEL_ONE:
         level_one_errors = validate_level_one(name)
         all_errors.extend(level_one_errors)
-
-        # Check if any error is about minimum length
-        for error in level_one_errors:
-            if "must be at least" in error.message:
-                level_one_length_failed = True
-                break
 
     if max_level >= StrictnessLevel.LEVEL_TWO:
         all_errors.extend(validate_level_two(name, is_class))
 
     if max_level >= StrictnessLevel.LEVEL_THREE:
-        all_errors.extend(
-            validate_level_three(
-                name,
-                is_class,
-                allowed_segments,
-                skip_segment_length=level_one_length_failed,
-            )
-        )
+        all_errors.extend(validate_level_three(name, is_class, allowed_segments))
 
     if max_level >= StrictnessLevel.LEVEL_FOUR:
         all_errors.extend(validate_level_four(name, is_class, allowed_segments))
