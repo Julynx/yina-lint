@@ -3,32 +3,32 @@
         {
             "text": "$(zap) Format",
             "command": "uv run -m black src",
-            "color": "#f1c40f"
+            "color": "#d2c45e"
         },
         {
             "text": "$(check) Lint",
             "command": "uv run -m pylint src; uv run yina lint src",
-            "color": "#007acc"
+            "color": "#67c3aa"
         },
         {
             "text": "$(arrow-up) Push",
             "command": "git add . && git commit && git push",
-            "color": "#28a745"
+            "color": "#6aa548"
         },
         {
             "text": "$(arrow-down) Pull",
             "command": "git pull",
-            "color": "#17a2b8"
+            "color": "#5d86b5"
         },
         {
-            "text": "$(gear) Bump",
+            "text": "$(debug-step-over) Bump",
             "command": "uv version --bump patch",
-            "color": "#6f42c1"
+            "color": "#a763b8"
         },
         {
             "text": "$(rocket) Publish",
             "command": "uv build; uv publish",
-            "color": "#d73a49"
+            "color": "#e6646b"
         }
     ]
 }

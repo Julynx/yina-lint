@@ -25,6 +25,7 @@ allowed_segments = [
     "or",
     "to",
     "up",
+    "be"
 ]
 
 # Names that are always banned
