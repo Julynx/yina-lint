@@ -16,8 +16,18 @@
             "color": "#6f42c1"
         },
         {
+            "text": "$(pencil) Clean",
+            "command": "rm -rf build dist",
+            "color": "#dbab09"
+        },
+        {
+            "text": "$(package) Build",
+            "command": "uv build",
+            "color": "#4e9a06"
+        },
+        {
             "text": "$(rocket) Publish",
-            "command": "uv build; uv publish",
+            "command": "uv publish",
             "color": "#d73a49"
         }
     ]

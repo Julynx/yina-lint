@@ -3,7 +3,7 @@ name = "yina"
 version = "0.1.0"
 description = "A Python linter focused on naming conventions with 5 strictness levels"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.11"
 dependencies = [
     "colorama>=0.4.6",
     "tomli>=2.3.0",
