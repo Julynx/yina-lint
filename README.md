@@ -11,7 +11,7 @@ _A simple, yet opinionated linter for Python that helps you choose more descript
 
 <br>
 
-<img src='https://i.imgur.com/bpKaIBR.png' width='80%'>
+<img src='https://i.imgur.com/gq3U02h.png' width='80%'>
 
 ## Usage
 
