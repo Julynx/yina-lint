@@ -80,9 +80,11 @@ def handle_lint_command(args):
     # Use level from args or config
     strictness_level = StrictnessLevel(args.level if args.level else default_level)
 
-    print("="*2 + " yina lint " + "="*67)
+    print("=" * 2 + " yina lint " + "=" * 67)
 
-    print(f"-- Running with strictness level: {Fore.CYAN}{strictness_level.value}{Style.RESET_ALL}")
+    print(
+        f"-- Running with strictness level: {Fore.CYAN}{strictness_level.value}{Style.RESET_ALL}"
+    )
 
     if args.verbose:
         print(f"Linting: {target_path}")

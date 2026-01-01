@@ -1,14 +1,24 @@
 {
     "actions": [
         {
+            "text": "$(zap) Format",
+            "command": "uv run -m black src",
+            "color": "#f1c40f"
+        },
+        {
             "text": "$(check) Lint",
-            "command": "uv run pylint src; uv run yina lint src",
+            "command": "uv run -m pylint src; uv run yina lint src",
             "color": "#007acc"
         },
         {
             "text": "$(arrow-up) Push",
             "command": "git add . && git commit && git push",
             "color": "#28a745"
+        },
+        {
+            "text": "$(arrow-down) Pull",
+            "command": "git pull",
+            "color": "#17a2b8"
         },
         {
             "text": "$(gear) Bump",
