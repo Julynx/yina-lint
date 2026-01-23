@@ -206,10 +206,28 @@ def lint_directory(
         # Check if file should be excluded
         should_exclude = False
         for pattern in exclude_globs:
-            # Check if file or any parent directory matches the pattern
-            if file_path.match(pattern) or file_path.match(f"{pattern}/**"):
-                should_exclude = True
-                break
+            # Check if the file path or any of its parents match the pattern
+            # Convert to relative path from directory_path for proper matching
+            try:
+                relative_path = file_path.relative_to(directory_path)
+                # Check if any part of the path matches the exclusion pattern
+                if relative_path.match(pattern):
+                    should_exclude = True
+                    break
+                # Also check with /** appended to match files inside excluded directories
+                if relative_path.match(f"{pattern}/**"):
+                    should_exclude = True
+                    break
+                # Check each parent directory
+                for parent in relative_path.parents:
+                    if parent.match(pattern) or str(parent) == pattern.replace("**/", "").replace("/**", ""):
+                        should_exclude = True
+                        break
+                if should_exclude:
+                    break
+            except ValueError:
+                # File is not relative to directory_path, skip it
+                continue
         
         if should_exclude:
             continue
