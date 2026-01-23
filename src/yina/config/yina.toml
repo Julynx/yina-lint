@@ -4,6 +4,11 @@
 # Default strictness level (1-5)
 default_level = 3
 
+# Glob patterns to exclude from linting
+exclude_globs = [
+    "**/.venv",
+]
+
 # Names that are always allowed (bypass all checks)
 allowed_names = []
 

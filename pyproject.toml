@@ -1,6 +1,6 @@
 [project]
 name = "yina"
-version = "0.1.6"
+version = "0.1.7"
 description = "A Python linter focused on naming conventions with 5 strictness levels"
 readme = "README.md"
 requires-python = ">=3.11"

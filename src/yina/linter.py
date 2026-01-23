@@ -194,12 +194,26 @@ def lint_directory(
 
     all_errors = {}
 
+    # Get exclude patterns from config
+    exclude_globs = config.get("linter", {}).get("exclude_globs", [])
+
     if recursive:
         python_files = directory_path.rglob("*.py")
     else:
         python_files = directory_path.glob("*.py")
 
     for file_path in python_files:
+        # Check if file should be excluded
+        should_exclude = False
+        for pattern in exclude_globs:
+            # Check if file or any parent directory matches the pattern
+            if file_path.match(pattern) or file_path.match(f"{pattern}/**"):
+                should_exclude = True
+                break
+        
+        if should_exclude:
+            continue
+            
         file_errors = lint_file(file_path, max_level, config)
         if file_errors[str(file_path)]:
             all_errors.update(file_errors)
