@@ -232,10 +232,11 @@ wheels = [
 
 [[package]]
 name = "yina"
-version = "0.1.8"
+version = "0.1.9"
 source = { editable = "." }
 dependencies = [
     { name = "colorama" },
+    { name = "pathspec" },
     { name = "tomli" },
     { name = "tomli-w" },
 ]
@@ -249,6 +250,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "colorama", specifier = ">=0.4.6" },
+    { name = "pathspec", specifier = ">=0.12.1" },
     { name = "tomli", specifier = ">=2.3.0" },
     { name = "tomli-w", specifier = ">=1.2.0" },
 ]

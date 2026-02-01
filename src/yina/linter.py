@@ -2,7 +2,9 @@
 
 import ast
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Tuple
+
+import pathspec
 
 from yina.validators import StrictnessLevel, ValidationError, validate_name
 
@@ -176,7 +178,7 @@ def lint_directory(
     max_level: StrictnessLevel,
     recursive: bool = True,
     config: dict = None,
-) -> Dict[str, List[ValidationError]]:
+) -> Tuple[Dict[str, List[ValidationError]], bool]:
     """
     Lint all Python files in a directory.
 
@@ -187,12 +189,27 @@ def lint_directory(
         config: Configuration dictionary
 
     Returns:
-        Dictionary with file paths as keys and lists of errors as values
+        Tuple containing:
+        - Dictionary with file paths as keys and lists of errors as values
+        - Boolean indicating if .gitignore was used
     """
     if config is None:
         config = {}
 
     all_errors = {}
+    gitignore_used = False
+    spec = None
+
+    # Load .gitignore if present
+    gitignore_path = directory_path / ".gitignore"
+    if gitignore_path.exists() and gitignore_path.is_file():
+        try:
+            with open(gitignore_path, "r", encoding="utf-8") as gitignore_file:
+                spec = pathspec.PathSpec.from_lines("gitwildmatch", gitignore_file)
+            gitignore_used = True
+        except (OSError, UnicodeDecodeError):
+            # If we can't read .gitignore, just ignore it
+            pass
 
     # Get exclude patterns from config
     exclude_globs = config.get("linter", {}).get("exclude_globs", [])
@@ -203,6 +220,16 @@ def lint_directory(
         python_files = directory_path.glob("*.py")
 
     for file_path in python_files:
+        # Check .gitignore first
+        if spec:
+            try:
+                relative_path = file_path.relative_to(directory_path)
+                if spec.match_file(str(relative_path)):
+                    continue
+            except ValueError:
+                # Should not happen as we are iterating files in directory_path
+                pass
+
         # Check if file should be excluded
         should_exclude = False
         for pattern in exclude_globs:
@@ -220,7 +247,9 @@ def lint_directory(
                     break
                 # Check each parent directory
                 for parent in relative_path.parents:
-                    if parent.match(pattern) or str(parent) == pattern.replace("**/", "").replace("/**", ""):
+                    if parent.match(pattern) or str(parent) == pattern.replace(
+                        "**/", ""
+                    ).replace("/**", ""):
                         should_exclude = True
                         break
                 if should_exclude:
@@ -228,12 +257,12 @@ def lint_directory(
             except ValueError:
                 # File is not relative to directory_path, skip it
                 continue
-        
+
         if should_exclude:
             continue
-            
+
         file_errors = lint_file(file_path, max_level, config)
         if file_errors[str(file_path)]:
             all_errors.update(file_errors)
 
-    return all_errors
+    return all_errors, gitignore_used

@@ -4,7 +4,8 @@ import argparse
 import sys
 from pathlib import Path
 
-from colorama import Fore, Style, init as colorama_init
+from colorama import Fore, Style
+from colorama import init as colorama_init
 
 from yina.config import init_config, load_config
 from yina.linter import lint_directory, lint_file
@@ -91,6 +92,7 @@ def handle_lint_command(args):
         print()
 
     try:
+        gitignore_used = False
         if target_path.is_file():
             if target_path.suffix != ".py":
                 print(
@@ -100,9 +102,12 @@ def handle_lint_command(args):
                 sys.exit(1)
             errors_dict = lint_file(target_path, strictness_level, config)
         else:
-            errors_dict = lint_directory(
+            errors_dict, gitignore_used = lint_directory(
                 target_path, strictness_level, recursive=True, config=config
             )
+
+        if gitignore_used:
+            print(f"{Fore.YELLOW}ℹ Using .gitignore configuration{Style.RESET_ALL}")
 
         output = format_errors(errors_dict)
         print(output)
