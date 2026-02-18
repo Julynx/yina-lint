@@ -107,7 +107,7 @@ def handle_lint_command(args):
             )
 
         if gitignore_used:
-            print(f"{Fore.YELLOW}ℹ Using .gitignore configuration{Style.RESET_ALL}")
+            print(f"{Fore.YELLOW}-- Using .gitignore configuration{Style.RESET_ALL}")
 
         output = format_errors(errors_dict)
         print(output)
